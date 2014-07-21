@@ -10,10 +10,26 @@
 
 @interface ios_a_threeDetailViewController : UIViewController
 
+
+// Text Field Entry
 @property (weak, nonatomic) IBOutlet UITextField *detailText;
 
+@property (weak, nonatomic) IBOutlet UITextField *issueText;
+
+@property (weak, nonatomic) IBOutlet UITextField *publisherText;
+
+@property (weak, nonatomic) IBOutlet UITextField *writerText;
+
+@property (weak, nonatomic) IBOutlet UITextField *illustratorText;
+
+@property (weak, nonatomic) IBOutlet UITextField *inkerText;
+
+// Pointer to Item
 @property (strong, nonatomic) id detailItem;
 
+// Functions
 - (IBAction)detailTextChanged:(UITextField *)sender;
+
+//-(void) initialize;
 
 @end

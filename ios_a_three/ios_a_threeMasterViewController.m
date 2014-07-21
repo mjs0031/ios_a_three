@@ -17,43 +17,89 @@
 
 @implementation ios_a_threeMasterViewController
 
+
+/**
+ Pre-packaged update logic.
+ */
 -(void) viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     UITableView *view = (UITableView *) self.view;
     [view reloadData];
-}
+} // end viewWillAppear()
+
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
 }
 
-- (void)viewDidLoad
-{
+
+/**
+ Override logic for setEditing function. 
+ 
+ Blueprint for this function was found through the developer.apple.com
+ site.
+ */
+- (void)setEditing:(BOOL)flag animated:(BOOL)animated {
+    
+    [super setEditing:flag animated:animated];
+    
+    if (flag == YES){
+        self.editButtonItem.title = @"done";
+        
+    }
+    else {
+        
+        self.editButtonItem.title = @"remove";
+    }
+} // end setEditing()
+
+
+
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    self.editButtonItem.title = @"remove";
+    
+    // Just because I can....
+    [[self navigationItem] setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:nil action:nil]];
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    
     self.navigationItem.rightBarButtonItem = addButton;
-}
+    
+    
+} // end viewDidLoad()
 
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+} // end didReceiveMemoryWarning
 
-- (void)insertNewObject:(id)sender
-{
+
+- (void)insertNewObject:(id)sender {
+    
+    // if uninitialized
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
+    
     NSMutableDictionary *myDict = [[NSMutableDictionary alloc] init];
-    [myDict setObject:@"blah" forKey:@"text"];
+    
+    [myDict setObject:@"{ enter title }" forKey:@"text"];
+    
     [_objects insertObject:myDict atIndex:0];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
 #pragma mark - Table View
@@ -74,6 +120,7 @@
 
     NSMutableDictionary *myDict = _objects[indexPath.row];
     cell.textLabel.text = [myDict objectForKey:@"text"];
+    cell.detailTextLabel.text = [myDict objectForKey:@"issueText"];
     return cell;
 }
 
