@@ -17,6 +17,12 @@
 
 @implementation ios_a_threeMasterViewController
 
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    UITableView *view = (UITableView *) self.view;
+    [view reloadData];
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -43,7 +49,9 @@
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
+    NSMutableDictionary *myDict = [[NSMutableDictionary alloc] init];
+    [myDict setObject:@"blah" forKey:@"text"];
+    [_objects insertObject:myDict atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -64,8 +72,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSMutableDictionary *myDict = _objects[indexPath.row];
+    cell.textLabel.text = [myDict objectForKey:@"text"];
     return cell;
 }
 
@@ -105,7 +113,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
+        NSMutableDictionary *object = _objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }
