@@ -92,12 +92,12 @@
     
     NSMutableDictionary *myDict = [[NSMutableDictionary alloc] init];
     
-    [myDict setObject:@"{ enter title }" forKey:@"text"];
-    [myDict setObject:@"{ enter issue }" forKey:@"issueText"];
-    [myDict setObject:@"{ enter publisher }" forKey:@"publisherText"];
-    [myDict setObject:@"{ enter illustrator }" forKey:@"illustratorText"];
-    [myDict setObject:@"{ enter writer }" forKey:@"writerText"];
-    [myDict setObject:@"{ enter inker }" forKey:@"inkerText"];
+    [myDict setObject:@"{ enter title }"        forKey:@"text"];
+    [myDict setObject:@"{ enter issue }"        forKey:@"issueText"];
+    [myDict setObject:@"{ enter publisher }"    forKey:@"publisherText"];
+    [myDict setObject:@"{ enter illustrator }"  forKey:@"illustratorText"];
+    [myDict setObject:@"{ enter writer }"       forKey:@"writerText"];
+    [myDict setObject:@"{ enter inker }"        forKey:@"inkerText"];
     
     [_objects insertObject:myDict atIndex:0];
     
@@ -125,11 +125,14 @@
  Cell mods. Not currently working with issue number
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     NSMutableDictionary *myDict = _objects[indexPath.row];
-    cell.textLabel.text = [myDict objectForKey:@"text"];
-    cell.detailTextLabel.text = [myDict objectForKey:@"issueText"];
+    
+    cell.textLabel.text         = [myDict objectForKey:@"text"];
+    cell.detailTextLabel.text   = [myDict objectForKey:@"issueText"];
+    
     return cell;
 } // end cellForRowAtIndexPath()
 
@@ -154,21 +157,6 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

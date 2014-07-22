@@ -34,12 +34,12 @@
 
     if (self.detailItem) {
         
-        self.detailText.text = [self.detailItem objectForKey:@"text"];
-        self.issueText.text  = [self.detailItem objectForKey:@"issueText"];
-        self.publisherText.text  = [self.detailItem objectForKey:@"publisherText"];
-        self.writerText.text  = [self.detailItem objectForKey:@"writerText"];
-        self.illustratorText.text  = [self.detailItem objectForKey:@"illustratorText"];
-        self.inkerText.text  = [self.detailItem objectForKey:@"inkerText"];
+        self.detailText.text      = [self.detailItem objectForKey:@"text"];
+        self.issueText.text       = [self.detailItem objectForKey:@"issueText"];
+        self.publisherText.text   = [self.detailItem objectForKey:@"publisherText"];
+        self.writerText.text      = [self.detailItem objectForKey:@"writerText"];
+        self.illustratorText.text = [self.detailItem objectForKey:@"illustratorText"];
+        self.inkerText.text       = [self.detailItem objectForKey:@"inkerText"];
         
         NSDate *date = [self.detailItem objectForKey:@"dateText"];
         
