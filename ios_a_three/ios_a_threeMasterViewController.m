@@ -26,6 +26,7 @@
     [super viewWillAppear:animated];
     UITableView *view = (UITableView *) self.view;
     [view reloadData];
+    
 } // end viewWillAppear()
 
 
@@ -92,6 +93,11 @@
     NSMutableDictionary *myDict = [[NSMutableDictionary alloc] init];
     
     [myDict setObject:@"{ enter title }" forKey:@"text"];
+    [myDict setObject:@"{ enter issue }" forKey:@"issueText"];
+    [myDict setObject:@"{ enter publisher }" forKey:@"publisherText"];
+    [myDict setObject:@"{ enter illustrator }" forKey:@"illustratorText"];
+    [myDict setObject:@"{ enter writer }" forKey:@"writerText"];
+    [myDict setObject:@"{ enter inker }" forKey:@"inkerText"];
     
     [_objects insertObject:myDict atIndex:0];
     
@@ -114,28 +120,36 @@
     return _objects.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+/**
+ Cell mods. Not currently working with issue number
+ */
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     NSMutableDictionary *myDict = _objects[indexPath.row];
     cell.textLabel.text = [myDict objectForKey:@"text"];
     cell.detailTextLabel.text = [myDict objectForKey:@"issueText"];
     return cell;
-}
+} // end cellForRowAtIndexPath()
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
+
     return YES;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [_objects removeObjectAtIndex:indexPath.row];
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+    
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }

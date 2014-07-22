@@ -24,12 +24,23 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *inkerText;
 
+// Date Field Entry
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 // Pointer to Item
 @property (strong, nonatomic) id detailItem;
 
 // Functions
 - (IBAction)detailTextChanged:(UITextField *)sender;
 
+- (IBAction)detailDateChanged:(id)sender;
+
+// Keyboard Ending Functions
+- (IBAction)textFieldDoneEditing:(id)sender;
+
+- (IBAction)backgroundTap:(id)sender;
+
+// configureView might replace this.
 //-(void) initialize;
 
 @end
